@@ -6,42 +6,110 @@
 <title>Секретный ник</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f0f14;color:white;font-family:Arial,sans-serif}
-.card{width:min(90%,420px);padding:35px 25px;text-align:center;background:#181820;border:1px solid #292936;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-h1{margin:0 0 12px;font-size:26px}
-p{color:#aaa;line-height:1.5;margin-bottom:25px}
-button{width:100%;padding:15px;border:0;border-radius:12px;background:white;color:#111;font-size:16px;font-weight:bold;cursor:pointer}
-button:active{transform:scale(.98)}
-#status{min-height:22px;margin-top:15px;color:#8cffb0;font-size:14px}
-.author{margin-top:30px;color:#666;font-size:13px}
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#0f0f14;
+color:#fff;
+font-family:Arial,sans-serif
+}
+.card{
+width:min(90%,420px);
+padding:35px 25px;
+text-align:center;
+background:#181820;
+border:1px solid #292936;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,.4)
+}
+h1{
+margin:0 0 12px;
+font-size:26px
+}
+p{
+color:#aaa;
+line-height:1.5;
+margin-bottom:25px
+}
+button{
+width:100%;
+padding:16px;
+border:0;
+border-radius:12px;
+background:#fff;
+color:#111;
+font-size:16px;
+font-weight:bold;
+cursor:pointer
+}
+button:active{
+transform:scale(.98)
+}
+#status{
+margin-top:15px;
+min-height:22px;
+font-size:14px;
+color:#8cffb0
+}
+.author{
+margin-top:30px;
+color:#666;
+font-size:13px
+}
 </style>
 </head>
+
 <body>
+
 <div class="card">
+
 <h1>Секретный ник</h1>
-<p>Нажми на кнопку ниже, чтобы скопировать символ.</p>
-<button onclick="copySecret()">Скопировать секретный ник</button>
+
+<p>Нажми кнопку, чтобы скопировать символ.</p>
+
+<button onclick="copySecret()">
+Скопировать секретный ник
+</button>
+
 <div id="status"></div>
-<div class="author">Сделано: Sakura</div>
+
+<div class="author">
+Сделано: Sakura
 </div>
+
+</div>
+
 <script>
-const secret="\u3164";
-async function copySecret(){
-try{
-await navigator.clipboard.writeText(secret);
-document.getElementById("status").textContent="✓ Скопировано в буфер обмена";
-}catch(e){
-const textarea=document.createElement("textarea");
-textarea.value=secret;
-textarea.style.position="fixed";
-textarea.style.opacity="0";
-document.body.appendChild(textarea);
-textarea.select();
-document.execCommand("copy");
-textarea.remove();
-document.getElementById("status").textContent="✓ Скопировано в буфер обмена";
-}
+const secret = "\u1160";
+
+async function copySecret() {
+    const status = document.getElementById("status");
+
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(secret);
+        } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = secret;
+            textarea.style.position = "fixed";
+            textarea.style.left = "-9999px";
+            textarea.style.top = "0";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand("copy");
+            textarea.remove();
+        }
+
+        status.textContent = "✓ Символ скопирован";
+    } catch (error) {
+        status.textContent = "Не удалось скопировать";
+    }
 }
 </script>
+
 </body>
 </html>
