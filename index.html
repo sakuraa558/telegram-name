@@ -1,67 +1,125 @@
-<div class="logo">S</div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura</title>
+</head>
 
-<h1>Sakura</h1>
-<div class="subtitle">Секретный ник</div>
+<body style="margin:0;background:#0b0713;color:white;font-family:Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;">
 
-<div class="tabs">
-    <button class="tab active" onclick="showPage('home', this)">
-        Главная
-    </button>
+<div style="width:100%;max-width:420px;background:#191226;border:1px solid #49356b;border-radius:25px;padding:25px;box-sizing:border-box;text-align:center;box-shadow:0 15px 60px rgba(0,0,0,.6);">
 
-    <button class="tab" onclick="showPage('about', this)">
-        Обо мне
-    </button>
+<div style="width:70px;height:70px;border-radius:50%;margin:0 auto 15px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold;">
+S
 </div>
 
-<div id="home" class="page active">
+<h1 style="margin:0;font-size:28px;">Sakura</h1>
 
-    <div class="info">
-        Нажми кнопку ниже, чтобы скопировать специальный символ.
-    </div>
+<p style="color:#aaa;margin:8px 0 25px;">Секретный ник</p>
 
-    <button class="copy-button" onclick="copySecret()">
-        📋 Скопировать секретный ник
-    </button>
+<div style="display:flex;gap:8px;margin-bottom:20px;">
 
-    <div id="status" class="status"></div>
+<button onclick="showHome()" id="homeButton" style="flex:1;padding:12px;border:0;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#db2777);color:white;font-size:15px;">
+Главная
+</button>
 
-    <a
-        class="funpay"
-        href="https://funpay.com/users/21529080/"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        🛒 Мой профиль FunPay
-    </a>
+<button onclick="showAbout()" id="aboutButton" style="flex:1;padding:12px;border:0;border-radius:12px;background:#29203a;color:#aaa;font-size:15px;">
+Обо мне
+</button>
 
 </div>
 
-<div id="about" class="page">
+<div id="home">
 
-    <div class="about">
+<div style="background:#241a32;border-radius:15px;padding:18px;margin-bottom:15px;color:#ccc;">
+Нажми кнопку, чтобы получить специальный символ.
+</div>
 
-        <h2>Обо мне</h2>
+<button onclick="copySecret()" style="width:100%;padding:16px;border:0;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:white;font-size:16px;font-weight:bold;">
+📋 Скопировать секретный ник
+</button>
 
-        <p>
-            Привет! Я Sakura.
-            Здесь находится мой специальный символ
-            и ссылка на мой профиль FunPay.
-        </p>
+<div id="status" style="min-height:24px;margin-top:12px;color:#86efac;font-size:14px;"></div>
 
-        <a
-            class="funpay"
-            href="https://funpay.com/users/21529080/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Перейти на FunPay
-        </a>
+<div style="margin-top:15px;padding:15px;background:#241f2c;border-radius:14px;color:#aaa;font-size:13px;">
+Если ты на iPhone и копирование не сработало, нажми на поле ниже и выбери «Скопировать».
+</div>
 
-    </div>
+<input id="secretField" value="ᅠ" readonly
+style="width:100%;margin-top:10px;padding:15px;border-radius:12px;border:1px solid #493d59;background:#100c17;color:white;text-align:center;font-size:18px;box-sizing:border-box;">
+
+<a href="https://funpay.com/users/21529080/" target="_blank"
+style="display:block;text-decoration:none;margin-top:12px;padding:15px;border-radius:14px;background:#292331;color:white;font-weight:bold;">
+🛒 Мой профиль FunPay
+</a>
 
 </div>
 
-<div class="footer">
-    Сделано: Sakura
+<div id="about" style="display:none;">
+
+<div style="background:#241a32;border-radius:15px;padding:20px;color:#ccc;line-height:1.6;">
+<h2 style="color:white;margin-top:0;">Обо мне</h2>
+
+Привет! Я Sakura.<br><br>
+
+Здесь находится мой специальный символ и ссылка на мой профиль FunPay.
+
+<a href="https://funpay.com/users/21529080/" target="_blank"
+style="display:block;text-decoration:none;margin-top:20px;padding:15px;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:white;font-weight:bold;text-align:center;">
+Перейти на FunPay
+</a>
 </div>
 
+</div>
+
+<div style="margin-top:25px;color:#666;font-size:13px;">
+Сделано: Sakura
+</div>
+
+</div>
+
+<script>
+
+const secret = "\u1160";
+
+async function copySecret() {
+
+    const status = document.getElementById("status");
+
+    try {
+
+        if (navigator.clipboard && window.isSecureContext) {
+
+            await navigator.clipboard.writeText(secret);
+
+            status.textContent = "✓ Символ скопирован";
+
+        } else {
+
+            throw new Error("Clipboard unavailable");
+
+        }
+
+    } catch (error) {
+
+        const field = document.getElementById("secretField");
+
+        field.focus();
+        field.select();
+        field.setSelectionRange(0, field.value.length);
+
+        status.textContent = "Нажми на выделенный символ → «Скопировать»";
+
+    }
+}
+
+function showHome() {
+
+    document.getElementById("home").style.display = "block";
+    document.getElementById("about").style.display = "none";
+
+    document.getElementById("homeButton").style.background =
+        "linear-gradient(135deg,#7c3aed,#db2777)";
+
+    document.getElementById("homeButton").
