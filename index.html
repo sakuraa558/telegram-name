@@ -8,44 +8,43 @@
 
 <div class="tabs">
 
-    <button type="button" class="tab active" id="homeTab">
+    <button id="homeButton" class="active" type="button">
         Главная
     </button>
 
-    <button type="button" class="tab" id="aboutTab">
+    <button id="aboutButton" type="button">
         Обо мне
     </button>
 
 </div>
 
 
-<div id="homePage">
+<div id="home">
 
-    <div class="info">
+    <div class="box">
         Нажми кнопку, чтобы получить специальный символ.
     </div>
 
-    <button type="button" class="copy-button" id="copyButton">
+    <button id="copyButton" class="copy" type="button">
         📋 Скопировать секретный ник
     </button>
 
-    <div class="status" id="status"></div>
+    <div id="status" class="status"></div>
 
-    <div class="fallback">
-        Если автоматическое копирование не сработало,
-        нажми на поле ниже, выдели символ и выбери
-        «Скопировать».
+    <div class="secret-box">
+        Если копирование не сработает, нажми на поле
+        ниже и выбери «Скопировать».
     </div>
 
     <input
-        id="secretField"
+        id="secret"
         class="secret"
         value="ᅠ"
         readonly
     >
 
     <a
-        class="funpay-button"
+        class="funpay"
         href="https://funpay.com/users/21529080/"
         target="_blank"
     >
@@ -55,7 +54,7 @@
 </div>
 
 
-<div id="aboutPage" class="about">
+<div id="about" class="about">
 
     <h2>Обо мне</h2>
 
@@ -67,7 +66,7 @@
     и ссылка на мой профиль FunPay.
 
     <a
-        class="funpay-button"
+        class="funpay"
         href="https://funpay.com/users/21529080/"
         target="_blank"
     >
